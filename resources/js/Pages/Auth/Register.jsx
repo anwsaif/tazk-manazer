@@ -1,3 +1,5 @@
+import { Link } from '@inertiajs/react'
+
 const SignUp = () => {
   return (
     <>
@@ -158,9 +160,9 @@ const SignUp = () => {
                 <div className="mt-6 text-center">
                   <p>
                     Already have an account?{' '}
-                    {/* <Link to="/auth/signin" className="text-primary"> */}
-                    {/*   Sign in */}
-                    {/* </Link> */}
+                    <Link href="/login" className="text-primary">
+                      Sign in
+                    </Link>
                   </p>
                 </div>
               </form>
