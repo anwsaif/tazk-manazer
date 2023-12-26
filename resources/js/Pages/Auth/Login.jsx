@@ -5,8 +5,9 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import Checkbox from '@/Components/Checkbox';
 
-export default function Login  ({ status, canResetPassword }) {
+export default function Login  ({ status, canResetPassword, appName }) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
@@ -30,9 +31,9 @@ export default function Login  ({ status, canResetPassword }) {
     <>
       <GuestLayout>
         <Head title='Sign In' />
-        <span className="mb-1.5 block font-medium">Start for free</span>
+        {/* <span className="mb-1.5 block font-medium">Start for free</span> */}
         <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-          Sign In to TailAdmin
+          Sign In to {appName}
         </h2>
 
         <form onSubmit={submit}>
@@ -82,7 +83,7 @@ export default function Login  ({ status, canResetPassword }) {
                 value={data.password}
                 autoComplete="current-password"
                 onChange={(e) => setData('password', e.target.value)}
-                placeholder="password..."
+                placeholder="Enter your password"
               />
 
               <span className="absolute right-4 top-4">
@@ -110,8 +111,26 @@ export default function Login  ({ status, canResetPassword }) {
             <InputError message={errors.password} className="mt-2" />
           </div>
 
+          <div className="mb-5 flex justify-between ">
+            <Checkbox
+              text='Remember Me'
+              name="remember"
+              checked={data.remember}
+              onChange={(e) => setData('remember', e.target.checked)}
+            />
+
+            {canResetPassword && (
+              <Link
+                href={route('password.request')}
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+              >
+                Forgot your password?
+              </Link>
+            )}
+          </div>
+
           <div className="mb-5">
-            <PrimaryButton className="ms-4" disabled={processing}>
+            <PrimaryButton disabled={processing}>
               Sign in
             </PrimaryButton>
           </div>
