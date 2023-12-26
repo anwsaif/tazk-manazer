@@ -1,7 +1,31 @@
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, useForm } from '@inertiajs/react'
 import GuestLayout from '@/Layouts/GuestLayout'
+import { useEffect } from 'react';
+import InputLabel from '@/Components/InputLabel';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
+import PrimaryButton from '@/Components/PrimaryButton';
 
-const SignUp = () => {
+const SignUp = ({ appName }) => {
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
+
+  useEffect(() => {
+    return () => {
+      reset('password', 'password_confirmation');
+    };
+  }, []);
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    post(route('register'));
+  };
+
   return (
     <>
       <GuestLayout>
@@ -9,21 +33,29 @@ const SignUp = () => {
 
         <span className="mb-1.5 block font-medium">Start for free</span>
         <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-          Sign Up to TailAdmin
+          Sign Up to {appName}
         </h2>
 
-        <form>
+        <form onSubmit={submit}>
           <div className="mb-4">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Name
-            </label>
+            <InputLabel htmlFor="name" value="Name" />
             <div className="relative">
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
+              {/* <input */}
+              {/*   className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" */}
+              {/* /> */}
 
+              <TextInput
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                value={data.name}
+                className="mt-1 block w-full"
+                autoComplete="name"
+                isFocused={true}
+                onChange={(e) => setData('name', e.target.value)}
+                required
+              />
               <span className="absolute right-4 top-4">
                 <svg
                   className="fill-current"
@@ -46,17 +78,22 @@ const SignUp = () => {
                 </svg>
               </span>
             </div>
+            <InputError message={errors.name} className="mt-2" />
           </div>
 
           <div className="mb-4">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Email
-            </label>
+            <InputLabel htmlFor="email" value="Email" />
             <div className="relative">
-              <input
-                type="email"
+              <TextInput
+                id="email"
                 placeholder="Enter your email"
-                className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                type="email"
+                name="email"
+                value={data.email}
+                className="mt-1 block w-full"
+                autoComplete="username"
+                onChange={(e) => setData('email', e.target.value)}
+                required
               />
 
               <span className="absolute right-4 top-4">
@@ -77,19 +114,23 @@ const SignUp = () => {
                 </svg>
               </span>
             </div>
+            <InputError message={errors.email} className="mt-2" />
           </div>
 
           <div className="mb-4">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Password
-            </label>
+            <InputLabel htmlFor="password" value="Password" />
             <div className="relative">
-              <input
-                type="password"
+              <TextInput
+                id="password"
                 placeholder="Enter your password"
-                className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                type="password"
+                name="password"
+                value={data.password}
+                className="mt-1 block w-full"
+                autoComplete="new-password"
+                onChange={(e) => setData('password', e.target.value)}
+                required
               />
-
               <span className="absolute right-4 top-4">
                 <svg
                   className="fill-current"
@@ -112,19 +153,23 @@ const SignUp = () => {
                 </svg>
               </span>
             </div>
+            <InputError message={errors.password} className="mt-2" />
           </div>
 
           <div className="mb-6">
-            <label className="mb-2.5 block font-medium text-black dark:text-white">
-              Re-type Password
-            </label>
+            <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
             <div className="relative">
-              <input
+              <TextInput
+                id="password_confirmation"
                 type="password"
+                name="password_confirmation"
                 placeholder="Re-enter your password"
-                className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                value={data.password_confirmation}
+                className="mt-1 block w-full"
+                autoComplete="new-password"
+                onChange={(e) => setData('password_confirmation', e.target.value)}
+                required
               />
-
               <span className="absolute right-4 top-4">
                 <svg
                   className="fill-current"
@@ -147,19 +192,22 @@ const SignUp = () => {
                 </svg>
               </span>
             </div>
+            <InputError message={errors.password_confirmation} className="mt-2" />
           </div>
 
           <div className="mb-5">
-            <input
+            <PrimaryButton
+              disabled={processing}
               type="submit"
-              value="Create account"
-              className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-            />
+            >
+              Create account
+            </PrimaryButton>
           </div>
 
           <div className="mt-6 text-center">
             <p>
               Already have an account?{' '}
+
               <Link href="/login" className="text-primary">
                 Sign in
               </Link>
