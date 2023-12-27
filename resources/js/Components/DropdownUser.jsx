@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@inertiajs/react';
 
 
 const DropdownUser = () => {
@@ -36,11 +36,11 @@ const DropdownUser = () => {
 
   return (
     <div className="relative">
-      <Link
+      <button
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-4"
-        to="#"
+        href="#"
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
@@ -50,7 +50,7 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <img src={UserOne} alt="User" />
+          {/* <img src={UserOne} alt="User" /> */}
         </span>
 
         <svg
@@ -70,7 +70,7 @@ const DropdownUser = () => {
             fill=""
           />
         </svg>
-      </Link>
+      </button>
 
       {/* <!-- Dropdown Start --> */}
       <div
@@ -84,7 +84,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
             <Link
-              to="/profile"
+              href="/profile"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg
@@ -109,7 +109,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              to="#"
+              href="#"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg
@@ -130,7 +130,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              to="/settings"
+              href="/settings"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg

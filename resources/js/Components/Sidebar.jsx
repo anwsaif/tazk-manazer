@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 // import Logo from '../images/logo/logo.svg';
 import SidebarLinkGroup from './SidebarLinkGroup';
+import { usePage, Link } from '@inertiajs/react';
+// import { usePage } from '@inertiajs/react';
 
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const location = useLocation();
-  const { pathname } = location;
+  // const location = useLocation();
+  const { url } = usePage();
+  const pathname = url;
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -60,9 +62,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <NavLink to="/">
+        <Link href="/">
           {/* <img src={Logo} alt="Logo" /> */}
-        </NavLink>
+        </Link>
 
         <button
           ref={trigger}
@@ -107,8 +109,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
+                      <Link
+                        href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/' ||
                             pathname.includes('dashboard')) &&
@@ -164,7 +166,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </Link>
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate transform overflow-hidden ${
@@ -173,15 +175,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
-                            <NavLink
-                              to="/"
+                            <Link
+                              href="/"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               eCommerce
-                            </NavLink>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -194,8 +196,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
               {/* <!-- Menu Item Calendar --> */}
               <li>
-                <NavLink
-                  to="/calendar"
+                <Link
+                  href="/calendar"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('calendar') &&
                     'bg-graydark dark:bg-meta-4'
@@ -215,14 +217,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     />
                   </svg>
                   Calendar
-                </NavLink>
+                </Link>
               </li>
               {/* <!-- Menu Item Calendar --> */}
 
               {/* <!-- Menu Item Profile --> */}
               <li>
-                <NavLink
-                  to="/profile"
+                <Link
+                  href="/profile"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}
@@ -245,7 +247,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     />
                   </svg>
                   Profile
-                </NavLink>
+                </Link>
               </li>
               {/* <!-- Menu Item Profile --> */}
 
@@ -258,8 +260,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
+                      <Link
+                        href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/forms' ||
                             pathname.includes('forms')) &&
@@ -319,7 +321,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </Link>
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate transform overflow-hidden ${
@@ -328,26 +330,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
-                            <NavLink
-                              to="/forms/form-elements"
+                            <Link
+                              href="/forms/form-elements"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Form Elements
-                            </NavLink>
+                            </Link>
                           </li>
                           <li>
-                            <NavLink
-                              to="/forms/form-layout"
+                            <Link
+                              href="/forms/form-layout"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Form Layout
-                            </NavLink>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -360,8 +362,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
               {/* <!-- Menu Item Tables --> */}
               <li>
-                <NavLink
-                  to="/tables"
+                <Link
+                  href="/tables"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('tables') && 'bg-graydark dark:bg-meta-4'
                   }`}
@@ -392,14 +394,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     </defs>
                   </svg>
                   Tables
-                </NavLink>
+                </Link>
               </li>
               {/* <!-- Menu Item Tables --> */}
 
               {/* <!-- Menu Item Settings --> */}
               <li>
-                <NavLink
-                  to="/settings"
+                <Link
+                  href="/settings"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('settings') &&
                     'bg-graydark dark:bg-meta-4'
@@ -435,7 +437,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     </defs>
                   </svg>
                   Settings
-                </NavLink>
+                </Link>
               </li>
               {/* <!-- Menu Item Settings --> */}
             </ul>
@@ -450,8 +452,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Chart --> */}
               <li>
-                <NavLink
-                  to="/chart"
+                <Link
+                  href="/chart"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('chart') && 'bg-graydark dark:bg-meta-4'
                   }`}
@@ -486,7 +488,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     </defs>
                   </svg>
                   Chart
-                </NavLink>
+                </Link>
               </li>
               {/* <!-- Menu Item Chart --> */}
 
@@ -497,8 +499,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
+                      <Link
+                        href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/ui' || pathname.includes('ui')) &&
                           'bg-graydark dark:bg-meta-4'
@@ -561,7 +563,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </Link>
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate transform overflow-hidden ${
@@ -570,26 +572,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
-                            <NavLink
-                              to="/ui/alerts"
+                            <Link
+                              href="/ui/alerts"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Alerts
-                            </NavLink>
+                            </Link>
                           </li>
                           <li>
-                            <NavLink
-                              to="/ui/buttons"
+                            <Link
+                              href="/ui/buttons"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Buttons
-                            </NavLink>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -609,8 +611,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
+                      <Link
+                        href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/auth' || pathname.includes('auth')) &&
                           'bg-graydark dark:bg-meta-4'
@@ -669,7 +671,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </Link>
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate transform overflow-hidden ${
@@ -678,26 +680,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
-                            <NavLink
-                              to="/auth/signin"
+                            <Link
+                              href="/auth/signin"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Sign In
-                            </NavLink>
+                            </Link>
                           </li>
                           <li>
-                            <NavLink
-                              to="/auth/signup"
+                            <Link
+                              href="/auth/signup"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
                               Sign Up
-                            </NavLink>
+                            </Link>
                           </li>
                         </ul>
                       </div>

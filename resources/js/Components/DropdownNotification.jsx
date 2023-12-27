@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@inertiajs/react';
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
+  const trigger = useRef(null);
+  const dropdown = useRef(null);
 
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -34,10 +34,10 @@ const DropdownNotification = () => {
 
   return (
     <li className="relative">
-      <Link
+      <button
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        to="#"
+        href="#"
         className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
       >
         <span className="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
@@ -57,7 +57,7 @@ const DropdownNotification = () => {
             fill=""
           />
         </svg>
-      </Link>
+      </button>
 
       <div
         ref={dropdown}
@@ -75,7 +75,7 @@ const DropdownNotification = () => {
           <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
+              href="#"
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
@@ -91,7 +91,7 @@ const DropdownNotification = () => {
           <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
+              href="#"
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
@@ -106,7 +106,7 @@ const DropdownNotification = () => {
           <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
+              href="#"
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
@@ -122,7 +122,7 @@ const DropdownNotification = () => {
           <li>
             <Link
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
+              href="#"
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
