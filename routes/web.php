@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks/new', function(){
         return Inertia::render('Tasks/Create');
     });
+    Route::get('/tasks', [TaskController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
