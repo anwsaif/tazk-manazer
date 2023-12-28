@@ -3,7 +3,7 @@ import Table from '@/Components/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, tasks }) {
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -12,7 +12,7 @@ export default function Dashboard({ auth }) {
       <Head title="Dashboard" />
       <Breadcrumb pageName="Task List" />
 
-      <Table />
+      <Table tasks={tasks} />
     </AuthenticatedLayout>
   );
 }

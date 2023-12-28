@@ -1,24 +1,28 @@
 import { Link } from '@inertiajs/react'
 import AlertSuccess from './AlertSuccess';
 import AlertFail from './AlertFail';
-const Table = () => {
-  const tasks = [
-    {
-      "task_name": "Workout for 45 minutes",
-      "due_in": "2023-12-29",
-      "priority": "high",
-    },
-    {
-      "task_name": "Finish coding tazk Manazer",
-      "due_in": "2023-12-29",
-      "priority": "high",
-    },
-    {
-      "task_name": "Buy internet data",
-      "due_in": "2023-12-29",
-      "priority": "low",
-    },
-  ]
+import { useEffect } from 'react';
+const Table = ({tasks}) => {
+  // const tasks = [
+  //   {
+  //     "task_name": "Workout for 45 minutes",
+  //     "due_in": "2023-12-29",
+  //     "priority": "high",
+  //   },
+  //   {
+  //     "task_name": "Finish coding tazk Manazer",
+  //     "due_in": "2023-12-29",
+  //     "priority": "high",
+  //   },
+  //   {
+  //     "task_name": "Buy internet data",
+  //     "due_in": "2023-12-29",
+  //     "priority": "low",
+  //   },
+  // ]
+  useEffect(() => {
+    console.log(tasks)
+  }, [])
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       {/* Success Alert */}
@@ -88,7 +92,7 @@ const Table = () => {
           </thead>
           <tbody>
             {
-              tasks.map(({ task_name, due_in, priority, key }) => {
+              tasks.map(({ name: task_name, due_in, status, priority, key }) => {
                 return (
 
                   <tr key={key}>
@@ -96,10 +100,11 @@ const Table = () => {
                       <h5 className="font-medium text-black dark:text-white">
                         {task_name}
                       </h5>
-                      {/* <p className="text-sm">$59.00</p> */}
                     </td>
                     <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                      <p className="text-black dark:text-white">{due_in}</p>
+                      <p className="text-black dark:text-white">
+                        {status ? 'Completed' : due_in}
+                      </p>
                     </td>
                     <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                       {

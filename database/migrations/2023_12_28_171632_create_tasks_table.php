@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->foreignId('user_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->dateTime('due_in');
             $table->timestamps();
         });
     }
