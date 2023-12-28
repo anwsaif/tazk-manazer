@@ -1,8 +1,7 @@
 import { Link } from '@inertiajs/react';
-// import Logo from '../images/logo/logo-icon.svg';
+import Logo from '../../images/logo/logo-icon.svg';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownNotification from './DropdownNotification';
-import DropdownUser from './DropdownUser';
 
 const Header = (props) => {
   return (
@@ -53,7 +52,7 @@ const Header = (props) => {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" href="/">
-            {/* <img src={Logo} alt="Logo" /> */}
+            <img src={Logo} alt="Logo" />
           </Link>
         </div>
 
@@ -68,10 +67,6 @@ const Header = (props) => {
             {/* <!-- Notification Menu Area --> */}
 
           </ul>
-
-          {/* <!-- User Area --> */}
-          <DropdownUser />
-          {/* <!-- User Area --> */}
         </div>
       </div>
     </header>
