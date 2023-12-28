@@ -1,7 +1,7 @@
 import Breadcrumb from '@/Components/Breadcrumb';
-import Table from '@/Components/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import Form from './Form'
 
 export default function Dashboard({ auth }) {
   return (
@@ -9,10 +9,10 @@ export default function Dashboard({ auth }) {
       user={auth.user}
       header={<h2 className="text-gray-800 dark:text-gray-200 text-xl font-semibold leading-tight">Dashboard</h2>}
     >
-      <Head title="Dashboard" />
-      <Breadcrumb pageName="Task List" />
+      <Head title="New Task" />
+      {/* <Breadcrumb pageName="New Task" /> */}
 
-      <Table />
+      <Form />
     </AuthenticatedLayout>
   );
 }
