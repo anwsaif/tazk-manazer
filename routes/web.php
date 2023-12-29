@@ -28,6 +28,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         "tasks" => User::find(auth()->id())->tasks,
+        "status" => session()->get('status'),
     ]);
 
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,10 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/tasks/new', function(){
-        return Inertia::render('Tasks/Create');
-    });
+    Route::get('/tasks/new', [TaskController::class, 'create']);
+
     Route::get('/tasks', [TaskController::class, 'index']);
+    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
 
 require __DIR__.'/auth.php';

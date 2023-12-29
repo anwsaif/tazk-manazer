@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function AlertSuccess({ title, message }) {
+function AlertSuccess({ title, message='Tap to dismiss' }) {
+  useEffect(() => {
+    document.querySelector('.border-l-6').classList.remove('!hidden')
+  }, [])
   return (
 
-    <div className="mb-6 flex w-full border-l-6 border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
+    <div onClick={e => e.currentTarget.classList.add('!hidden')} className="mb-6 flex w-full border-l-6 border-[#34D399] bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
       <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
         <svg
           width="16"

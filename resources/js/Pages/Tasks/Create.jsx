@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Form from './Form'
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, token }) {
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -12,7 +12,7 @@ export default function Dashboard({ auth }) {
       <Head title="New Task" />
       {/* <Breadcrumb pageName="New Task" /> */}
 
-      <Form />
+      <Form csrf={token}/>
     </AuthenticatedLayout>
   );
 }

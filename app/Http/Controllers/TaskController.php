@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Models\User;
+use Inertia\Inertia;
 
 class TaskController extends Controller
 {
@@ -14,10 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = User::find(1)->tasks;
-        foreach($tasks as $task){
-            echo $task;
-        }
+
     }
 
     /**
@@ -25,7 +23,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Tasks/Create', [
+            "token" => csrf_token(),
+        ]);
     }
 
     /**
@@ -33,7 +33,14 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        $task = new Task;
+        $task->name = $request->name;
+        $task->due_in = $request->due_in;
+        $task->priority = $request->priority;
+        $task->user_id = auth()->id();
+        $task->save();
+
+        return to_route('dashboard')->with('status', 'Task added successfully.');
     }
 
     /**
@@ -63,8 +70,10 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($task)
     {
-        //
+        Task::find($task)->delete();
+
+        return to_route('dashboard')->with('status', 'Task deleted successfully.');
     }
 }

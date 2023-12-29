@@ -1,5 +1,21 @@
-import { Link } from '@inertiajs/react'
-export default function Form (){
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import { Link, useForm } from '@inertiajs/react'
+
+export default function Form ({ csrf }){
+  const { data, setData, post, processing, errors } = useForm({
+    _token: csrf,
+    name: '',
+    due_in: '',
+    priority: '',
+  });
+
+  function submit(e){
+    e.preventDefault()
+    post(route('tasks.store'))
+  }
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:w-1/2">
       <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
@@ -8,40 +24,58 @@ export default function Form (){
         </h3>
 
       </div>
-      <form action="#">
+      <form onSubmit={submit}>
         <div className="p-6.5">
           <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <InputLabel
+                htmlFor="name"
+              >
                 Name <span className="text-meta-1">*</span>
-              </label>
-              <input
+              </InputLabel>
+              <TextInput
+                id="name"
                 type="text"
+                name='name'
                 placeholder="Enter the task name"
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                onChange={e => setData('name', e.target.value)}
+                isFocused={true}
+                value={data.name}
               />
+              <InputError message={errors.name} />
             </div>
 
           </div>
 
           <div className="mb-4.5">
-            <label className="mb-2.5 block text-black dark:text-white">
+            <InputLabel htmlFor="due_in">
               Due in <span className="text-meta-1">*</span>
-            </label>
-            <input
+            </InputLabel>
+            <TextInput
+              id="due_in"
+              name="due_in"
               type="datetime-local"
               placeholder="Select due time"
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              value={data.due_in}
+              onChange={e => setData('due_in', e.target.value)}
             />
+            <InputError message={errors.due_in} />
           </div>
 
 
           <div className="mb-4.5">
-            <label className="mb-2.5 block text-black dark:text-white">
+            <InputLabel htmlFor="priority">
               Priority <span className="text-meta-1">*</span>
-            </label>
+            </InputLabel>
             <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <select
+                name='priority'
+                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                value={data.priority}
+                onChange={e => setData('priority', e.target.value)}
+              >
                 <option value="">Choose priority</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -67,6 +101,7 @@ export default function Form (){
                 </svg>
               </span>
             </div>
+            <InputError message={errors.priority} />
           </div>
 
           <div className="flex w-full gap-4">
@@ -79,9 +114,9 @@ export default function Form (){
               </span>
               Cancel
             </Link>
-            <button className="flex w-full items-center justify-center rounded bg-primary p-3 font-medium text-gray">
+            <PrimaryButton disabled={processing}>
               Save
-            </button>
+            </PrimaryButton>
           </div>
         </div>
       </form>

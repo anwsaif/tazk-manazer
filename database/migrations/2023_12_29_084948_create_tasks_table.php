@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
-            $table->boolean('status');
-            $table->enum('priority', ['low', 'medium', 'high']);
+                $table->dateTime('due_in');
+                $table->enum('priority', ['low', 'medium', 'high']);
                 $table->foreignId('user_id')->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->dateTime('due_in');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
