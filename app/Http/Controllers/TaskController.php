@@ -37,6 +37,7 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->due_in = $request->due_in;
         $task->priority = $request->priority;
+        $task->status = 0;
         $task->user_id = auth()->id();
         $task->save();
 
@@ -62,9 +63,13 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update($id)
     {
-        //
+        $task = Task::find($id);
+        $task->status = !$task->status;
+        $task->save();
+
+        return to_route('dashboard');
     }
 
     /**

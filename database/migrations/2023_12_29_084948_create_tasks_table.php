@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 64);
+                $table->id();
+                $table->string('name', 64);
                 $table->dateTime('due_in');
                 $table->enum('priority', ['low', 'medium', 'high']);
-                $table->foreignId('user_id')->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->timestamps();
+                $table->boolean('status');
+                $table->foreignId('user_id');
+                $table->timestamps();
         });
     }
 

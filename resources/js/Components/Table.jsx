@@ -3,11 +3,14 @@ import AlertSuccess from './AlertSuccess';
 import AlertFail from './AlertFail';
 
 const Table = ({tasks, status}) => {
+  function alerted(){
+    if(document.querySelector('.border-l-6')) document.querySelector('.border-l-6').classList.remove('!hidden')
+  }
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       {/* Success Alert */}
       {status &&
-      <AlertSuccess title={status} message="" />
+      <AlertSuccess title={status}  />
 }
       {/* Fail Alert */}
       {/* <AlertFail title='Something has gone wrong' message="" /> */}
@@ -73,17 +76,17 @@ const Table = ({tasks, status}) => {
           </thead>
           <tbody>
             {
-              tasks.map(({ id, name: task_name, due_in, status, priority, key }) => {
+              tasks.map(({ id, name: task_name, due_in, status, priority }) => {
                 return (
 
-                  <tr key={key}>
+                  <tr key={id} className={status && 'relative opacity-50 after:absolute after:left-0 after:top-1/2 after:block after:h-[0.125rem] after:w-5/6 after:bg-black dark:after:bg-[#e3e3e3]'}>
                     <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                       <h5 className="font-medium text-black dark:text-white">
                         {task_name}
                       </h5>
                     </td>
                     <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                      <p className="text-black dark:text-white">
+                      <p className="relative z-50 inline bg-white text-black dark:bg-boxdark dark:text-white">
                         {status ? 'Completed' : due_in}
                       </p>
                     </td>
@@ -108,8 +111,11 @@ const Table = ({tasks, status}) => {
                     <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                       <div className="flex items-center space-x-3.5">
                         <Link
+                          href={route('tasks.update', id)}
+                          as='button'
+                          method='patch'
+                          onClick={alerted}
                           className="hover:text-meta-3"
-                          href="/tasks/show/1"
                         >
                         {/* <button className="hover:text-primary"> */}
                           <svg
@@ -135,6 +141,7 @@ const Table = ({tasks, status}) => {
                           href={route('tasks.destroy', id)}
                           as='button'
                           method='delete'
+                          onClick={alerted}
                         >
                           <svg
                             className="fill-current"

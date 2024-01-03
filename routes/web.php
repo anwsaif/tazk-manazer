@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
-        "tasks" => User::find(auth()->id())->tasks,
+        // "tasks" => User::find(auth()->id())->tasks,
+        "tasks" => DB::table('tasks')->where('tasks.user_id', '=', auth()->id())->orderBy('status')->get(),
         "status" => session()->get('status'),
     ]);
 
@@ -43,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index']);
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::patch('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 });
 
 require __DIR__.'/auth.php';
