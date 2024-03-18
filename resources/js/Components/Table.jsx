@@ -79,7 +79,7 @@ const Table = ({tasks, status}) => {
               tasks.map(({ id, name: task_name, due_in, status, priority }) => {
                 return (
 
-                  <tr key={id} className={status && 'relative opacity-50 after:absolute after:left-0 after:top-1/2 after:block after:h-[0.125rem] after:w-5/6 after:bg-black dark:after:bg-[#e3e3e3]'}>
+                  <tr key={id} className={status && 'relative opacity-50 after:absolute after:left-0 after:top-1/2 after:block after:h-[0.125rem] after:w-9/12 after:bg-black dark:after:bg-[#e3e3e3]'}>
                     <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                       <h5 className="font-medium text-black dark:text-white">
                         {task_name}
@@ -118,22 +118,9 @@ const Table = ({tasks, status}) => {
                           className="hover:text-meta-3"
                         >
                         {/* <button className="hover:text-primary"> */}
-                          <svg
-                            className="fill-current"
-                            width="18"
-                            height="18"
-                            viewBox="0 0 18 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z"
-                              fill=""
-                            />
-                            <path
-                              d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z"
-                              fill=""
-                            />
+                          <svg width="18" height="18" version="1.1" id="lni_lni-checkmark" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 64 64"  fill="none" className="fill-current">
+                            <path d="M60.6,13.4c-0.9-0.9-2.3-0.9-3.2,0l-34,33L6.6,29.9c-0.9-0.9-2.3-0.8-3.2,0c-0.9,0.9-0.8,2.3,0,3.2l17.7,17.2
+                              c0.6,0.6,1.4,0.9,2.3,0.9s1.6-0.3,2.3-0.9l34.9-33.9C61.5,15.7,61.5,14.3,60.6,13.4z"></path>
                           </svg>
                         </Link>
                         <Link
